@@ -6,7 +6,7 @@ on:
       - main
 
 env:
-  NODE_VERSION: ${{ steps.get_nvmrc.outputs.nvmrc_content }}
+  NODE_VERSION: ""
 
 jobs:
   build:
@@ -22,4 +22,4 @@ jobs:
       - name: Use node version
         run: |
           echo "Node version: $NODE_VERSION"
-          nvm install $NODE_VERSION
+          nvm install ${{ steps.get_nvmrc.outputs.nvmrc_content }}
