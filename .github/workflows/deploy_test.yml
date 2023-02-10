@@ -18,7 +18,7 @@ jobs:
         run: |
           nvmrc_content=$(curl https://api.github.com/repos/rishiip/test-curl/contents/.nvmrc | jq -r '.content' | base64 --decode)
           echo "::set-output name=nvmrc_content::$nvmrc_content"
-
-      - name: Use node version
-        run: |
-          nvm install ${{ steps.get_nvmrc.outputs.nvmrc_content }}
+      - name: Use Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ steps.get_nvmrc.outputs.nvmrc_content }}
