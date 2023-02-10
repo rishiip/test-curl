@@ -16,7 +16,7 @@ jobs:
       - name: Get .nvmrc content
         id: get_nvmrc
         run: |
-          nvmrc_content=$(curl https://api.github.com/repos/rishiip/test-curl/contents/.nvmrc | jq '.content' | tr -d '"' | base64 --decode)
+          nvmrc_content=$(curl https://api.github.com/repos/rishiip/test-curl/contents/.nvmrc | jq -r '.content' | base64 --decode)
           echo "::set-output name=nvmrc_content::$nvmrc_content"
 
       - name: Use node version
