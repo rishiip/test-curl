@@ -1,0 +1,25 @@
+name: Node version setup
+
+on:
+  push:
+    branches:
+      - main
+
+env:
+  NODE_VERSION: ${{ steps.get_nvmrc.outputs.nvmrc_content }}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Get .nvmrc content
+        id: get_nvmrc
+        run: |
+          nvmrc_content=$(curl https://api.github.com/repos/rishiip/test-curl/contents/.nvmrc | jq '.content' | tr -d '"' | base64 --decode)
+          echo "::set-output name=nvmrc_content::$nvmrc_content"
+
+      - name: Use node version
+        run: |
+          echo "Node version: $NODE_VERSION"
+          nvm install $NODE_VERSION
