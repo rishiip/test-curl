@@ -21,5 +21,4 @@ jobs:
 
       - name: Use node version
         run: |
-          echo "Node version: $NODE_VERSION"
           nvm install ${{ steps.get_nvmrc.outputs.nvmrc_content }}
